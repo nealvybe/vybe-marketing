@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vybe — Your prototype deserves a real tech stack</title>
+<style>
+  :root {
+    --navy: #0B1B36;
+    --pink: #FF3D7F;
+    --off: #F7F8FA;
+    --line: #E4E7EB;
+    --ink: #0B1B36;
+    --mute: #6B7280;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: #fff;
+    line-height: 1.55;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 1020px; margin: 0 auto; padding: 0 32px; }
+  .container--narrow { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px; max-width: 1020px; margin: 0 auto;
+  }
+  .nav-logo {
+    font-family: Georgia, serif; font-size: 22px; font-weight: 700;
+    color: #fff; letter-spacing: 0.06em; text-decoration: none;
+  }
+  .nav-logo span { color: var(--pink); }
+  .nav-actions { display: flex; gap: 12px; align-items: center; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-block; padding: 10px 22px; font-size: 14px;
+    font-weight: 600; letter-spacing: 0.04em; text-decoration: none;
+    cursor: pointer; border: none; transition: opacity 0.15s, transform 0.15s;
+    font-family: inherit;
+  }
+  .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-primary { background: var(--pink); color: #fff; }
+  .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.7); }
+  .btn-outline { background: transparent; color: var(--navy); border: 1px solid var(--line); }
+  .btn-dark { background: var(--navy); color: #fff; }
+  .btn-lg { padding: 15px 34px; font-size: 16px; }
+
+  /* SECTION SHELLS */
+  section { padding: 88px 0; border-bottom: 1px solid var(--line); }
+  .label {
+    color: var(--pink); font-size: 11px; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    margin-bottom: 16px; display: block;
+  }
+  h2 {
+    font-family: Georgia, serif; font-size: 40px; line-height: 1.1;
+    letter-spacing: -0.01em; margin-bottom: 20px; font-weight: 700;
+  }
+  p { margin-bottom: 16px; color: #1f2937; }
+  p.lede { font-size: 20px; line-height: 1.5; }
+  p:last-child { margin-bottom: 0; }
+
+  /* HERO */
+  .hero {
+    background: var(--navy); color: #fff;
+    padding: 100px 0 108px;
+    border-left: 6px solid var(--pink);
+    position: relative; overflow: hidden; border-bottom: none;
+  }
+  .hero::after {
+    content: ''; position: absolute;
+    top: -80px; right: -100px;
+    width: 520px; height: 520px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,61,127,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero .eyebrow {
+    color: var(--pink); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: Georgia, serif; font-size: 78px; line-height: 0.96;
+    letter-spacing: -0.025em; font-weight: 700; color: #fff;
+    margin-bottom: 28px; max-width: 760px;
+  }
+  .hero h1 em { color: var(--pink); font-style: normal; }
+  .hero .sub {
+    font-size: 20px; color: #C8CFDA;
+    max-width: 580px; margin-bottom: 44px; line-height: 1.5;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-proof {
+    margin-top: 56px; padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 13px; color: rgba(255,255,255,0.45);
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .hero-proof-row { display: flex; gap: 32px; flex-wrap: wrap; margin-top: 12px; }
+  .hero-proof-item { font-size: 13px; color: rgba(255,255,255,0.55); }
+  .hero-proof-item strong { color: #fff; font-size: 18px; display: block; margin-bottom: 2px; }
+
+  /* OCTO SECTION */
+  .octo-section { background: var(--off); border-bottom: 1px solid var(--line); }
+  .octo-split {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+    align-items: start; margin-top: 48px;
+  }
+  .octo-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; margin-bottom: 16px; display: block;
+  }
+  .octo-label--before { color: var(--mute); }
+  .octo-label--after { color: var(--pink); }
+  .octo-items { list-style: none; }
+  .octo-items li {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 12px 0; border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .octo-items li:last-child { border-bottom: none; }
+  .octo-items li .ico { flex-shrink: 0; margin-top: 2px; }
+  .octo-items li .ico--x { color: #dc2626; font-size: 13px; font-weight: 700; }
+  .octo-items li .ico--check { color: var(--pink); font-size: 13px; font-weight: 700; }
+  .octo-items li strong { color: var(--navy); }
+  .octo-items li span { color: #374151; }
+
+  /* ENABLES GRID */
+  .enables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 44px; border: 1px solid var(--line); }
+  .enables-cell { padding: 36px 36px; }
+  .enables-cell--br { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .enables-cell--b { border-bottom: 1px solid var(--line); }
+  .enables-cell--r { border-right: 1px solid var(--line); }
+  .enables-num { color: var(--pink); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 12px; }
+  .enables-h { font-family: Georgia, serif; font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+  .enables-p { font-size: 15px; color: #374151; margin: 0; line-height: 1.6; }
+
+  /* ICEBERG */
+  .iceberg-section {
+    background: #0A0A0A; color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.06); padding: 88px 0;
+  }
+  .iceberg-section h2 { color: #fff; }
+  .iceberg-section .label { color: var(--pink); }
+  .iceberg-section p { color: #C8CFDA; }
+  .iceberg-wrap { margin: 40px 0 12px; width: 100%; }
+  .iceberg-wrap svg { display: block; width: 100%; height: auto; }
+  .forces { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 40px; }
+  .force { border-left: 3px solid var(--pink); padding: 4px 0 4px 20px; }
+  .force .num { color: var(--pink); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; }
+  .force h4 { font-family: Georgia, serif; font-size: 18px; margin: 6px 0 8px; color: #fff; }
+  .force p { font-size: 15px; color: #9CA3AF; margin: 0; }
+
+  /* PRICING */
+  .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 44px; border: 1px solid var(--line); }
+  .plan {
+    padding: 32px 26px; position: relative;
+    border-right: 1px solid var(--line);
+  }
+  .plan:last-child { border-right: none; }
+  .plan--featured { background: var(--navy); }
+  .plan-badge {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--pink); color: #fff;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 4px 14px; white-space: nowrap;
+  }
+  .plan-name {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--mute); margin-bottom: 10px;
+  }
+  .plan--featured .plan-name { color: rgba(255,255,255,0.55); }
+  .plan-price {
+    font-family: Georgia, serif; font-size: 46px; font-weight: 700;
+    color: var(--navy); line-height: 1; margin-bottom: 4px;
+  }
+  .plan--featured .plan-price { color: #fff; }
+  .plan-price sup { font-size: 22px; vertical-align: super; }
+  .plan-period { font-size: 13px; color: var(--mute); margin-bottom: 22px; }
+  .plan--featured .plan-period { color: rgba(255,255,255,0.5); }
+  .plan-tagline {
+    font-family: Georgia, serif; font-size: 15px; margin-bottom: 20px;
+    color: #374151; font-style: italic; line-height: 1.4;
+  }
+  .plan--featured .plan-tagline { color: #C8CFDA; }
+  .plan-features { list-style: none; margin-bottom: 28px; }
+  .plan-features li {
+    font-size: 13px; color: #374151; padding: 6px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex; gap: 8px; align-items: flex-start; line-height: 1.45;
+  }
+  .plan--featured .plan-features li { color: #C8CFDA; border-bottom-color: rgba(255,255,255,0.1); }
+  .plan-features li::before { content: '✓'; color: var(--pink); flex-shrink: 0; font-weight: 700; font-size: 12px; margin-top: 1px; }
+  .plan-note { font-size: 12px; color: var(--mute); line-height: 1.5; margin-top: 10px; }
+  .plan--featured .plan-note { color: rgba(255,255,255,0.4); }
+  .addons-note { margin-top: 22px; font-size: 14px; color: var(--mute); text-align: center; }
+
+  /* BASELINE STACK GRID */
+  .stack-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 36px; }
+  .stack-item { background: #fff; padding: 22px 20px; }
+  .stack-item .si-name { font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 4px; }
+  .stack-item .si-desc { font-size: 13px; color: var(--mute); }
+
+  /* OFF-RAMP CARD */
+  .offramp { margin-top: 32px; background: var(--navy); color: #fff; padding: 36px 40px; border-left: 6px solid var(--pink); }
+  .offramp h3 { font-family: Georgia, serif; font-size: 24px; color: #fff; margin-bottom: 10px; font-weight: 700; }
+  .offramp p { color: #C8CFDA; margin: 0; font-size: 16px; line-height: 1.55; }
+
+  /* PERSONAS */
+  .spectrum-bar { display: flex; align-items: center; justify-content: space-between; margin: 32px 0 4px; font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--mute); }
+  .spectrum-bar .line { flex: 1; height: 2px; margin: 0 16px; background: linear-gradient(90deg, var(--line), var(--pink)); }
+  .personas { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 20px; }
+  .persona { padding: 30px 28px; border-top: 3px solid var(--pink); background: var(--off); }
+  .persona .ptag { font-size: 10px; letter-spacing: 0.2em; font-weight: 700; color: var(--mute); text-transform: uppercase; margin-bottom: 8px; }
+  .persona h3 { font-family: Georgia, serif; font-size: 20px; margin-bottom: 8px; font-weight: 700; }
+  .persona p { font-size: 15px; color: #374151; margin-bottom: 14px; }
+  .persona .trigger {
+    font-size: 14px; color: var(--navy); font-style: italic;
+    border-left: 2px solid var(--pink); padding-left: 12px;
+    line-height: 1.5; margin: 0;
+  }
+
+  /* HOW IT WORKS (vertical) */
+  .how-steps { margin-top: 44px; }
+  .how-step { display: flex; gap: 22px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .how-step:last-child { border-bottom: none; }
+  .how-num {
+    flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%;
+    background: var(--navy); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: Georgia, serif; font-weight: 700; font-size: 18px;
+  }
+  .how-step--key .how-num { background: var(--pink); }
+  .how-body h4 { font-family: Georgia, serif; font-size: 19px; margin-bottom: 6px; font-weight: 700; }
+  .how-body p { font-size: 15px; color: #374151; margin: 0; }
+  .term {
+    background: #0A0A0A; border: 1px solid rgba(255,255,255,0.12); border-radius: 8px;
+    padding: 13px 18px; margin-top: 14px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 14px; color: #E4E7EB;
+  }
+  .term .muted { color: #6B7280; }
+  .term .prompt { color: var(--pink); font-weight: 600; }
+
+  /* GET STARTED */
+  .get-started-section { background: var(--off); }
+  .get-started-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 44px; }
+  .gs-col h3 { font-family: Georgia, serif; font-size: 22px; margin-bottom: 8px; font-weight: 700; }
+  .gs-col p { font-size: 15px; color: #374151; margin-bottom: 20px; }
+  .pricing-links { display: flex; flex-direction: column; gap: 8px; }
+  .pricing-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 15px 20px; background: #fff; border: 1px solid var(--line);
+    text-decoration: none; color: var(--ink);
+    transition: border-color 0.15s, transform 0.12s;
+  }
+  .pricing-link:hover { border-color: var(--navy); transform: translateX(2px); }
+  .pricing-link.featured { border-color: var(--pink); border-width: 2px; }
+  .pricing-link .pl-left { display: flex; align-items: center; gap: 10px; }
+  .pricing-link .pl-name { font-weight: 700; font-size: 15px; }
+  .pricing-link .pl-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; background: var(--pink); color: #fff; padding: 2px 8px; }
+  .pricing-link .pl-right { display: flex; align-items: center; gap: 8px; }
+  .pricing-link .pl-price { font-family: Georgia, serif; font-size: 18px; font-weight: 700; color: var(--pink); }
+  form { display: flex; flex-direction: column; gap: 10px; }
+  input, textarea, select {
+    width: 100%; padding: 12px 14px; border: 1px solid var(--line);
+    font-size: 15px; font-family: inherit; background: #fff; color: var(--ink);
+    outline: none; transition: border-color 0.15s; -webkit-appearance: none;
+  }
+  input:focus, textarea:focus, select:focus { border-color: var(--navy); }
+  textarea { min-height: 80px; resize: vertical; }
+  .form-submit {
+    background: var(--pink); color: #fff; border: none;
+    padding: 14px 24px; font-size: 15px; font-weight: 700;
+    letter-spacing: 0.04em; cursor: pointer; transition: opacity 0.15s;
+    font-family: inherit; display: flex; align-items: center; justify-content: space-between;
+  }
+  .form-submit:hover { opacity: 0.88; }
+
+  /* FOOTER */
+  footer { background: var(--navy); color: #fff; padding: 52px 0; border-top: 3px solid var(--pink); }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: Georgia, serif; font-size: 26px; font-weight: 700; letter-spacing: 0.4em; color: #fff; }
+  .footer-logo span { color: var(--pink); }
+  footer p { color: #9CA3AF; font-size: 13px; margin: 0; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 50px; }
+    .hero .sub { font-size: 17px; }
+    .octo-split, .enables-grid, .pricing-grid, .stack-grid, .personas, .get-started-grid { grid-template-columns: 1fr; }
+    .enables-cell--br, .enables-cell--b, .enables-cell--r { border-right: none; border-bottom: 1px solid var(--line); }
+    .enables-cell { border-bottom: 1px solid var(--line); }
+    .enables-cell:last-child { border-bottom: none; }
+    .pricing-grid .plan { border-right: none; border-bottom: 1px solid var(--line); }
+    .pricing-grid .plan:last-child { border-bottom: none; }
+    .stack-grid { grid-template-columns: 1fr 1fr; }
+    .forces { grid-template-columns: 1fr; }
+    .spectrum-bar { display: none; }
+    .hero-proof-row { gap: 20px; }
+    h2 { font-size: 30px; }
+    section { padding: 60px 0; }
+    .nav-inner { padding: 16px 20px; }
+    .container, .container--narrow { padding: 0 20px; }
+    .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">Vybe<span>.</span></a>
+    <div class="nav-actions">
+      <a class="btn btn-ghost" href="#get-started">Sign in</a>
+      <a class="btn btn-primary" href="#pricing">Start building</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO (Track B — Prize) -->
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">From prototype to real company</div>
+    <h1>Your prototype<br><em>deserves a real tech stack.</em></h1>
+    <p class="sub">You built something real. Vybe is the partner that turns it into a production-grade product — security, compliance, and every service wired together — hosted for you, and handed back when you're ready to go on your own.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary btn-lg" href="#pricing">Start building — from $99/mo</a>
+      <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
+    </div>
+  </div>
+</header>
+
+<!-- SECTION 2 — What this unlocks (Track B) -->
+<section class="octo-section">
+  <div class="container">
+    <span class="label">What this unlocks</span>
+    <h2>Spend your days on the business.<br>We'll build the rest.</h2>
+    <p class="lede">With production engineering handled, your time goes where it should — product, customers, growth. Vybe gives you a battle-tested stack, the process to ship on it, and every service pre-connected, so you move fast without leaving anything broken behind you. We win when you become the next unicorn.</p>
+    <div class="enables-grid">
+      <div class="enables-cell enables-cell--br">
+        <div class="enables-num">01</div>
+        <h3 class="enables-h">Build in hours. Pivot the same day.</h3>
+        <p class="enables-p">A couple of hours from prototype to production-grade infrastructure. When the market shifts and you need to change direction, your stack moves with you — not against you. Faster iteration, fewer blockers, more shots at the right answer.</p>
+      </div>
+      <div class="enables-cell enables-cell--b">
+        <div class="enables-num">02</div>
+        <h3 class="enables-h">Your strategy leads. Always.</h3>
+        <p class="enables-p">The decisions that matter — what to build, who to build for, how to price it — stay with you. Auth, CI/CD, databases, observability, security: Vybe handles those so they never become your problem.</p>
+      </div>
+      <div class="enables-cell enables-cell--r">
+        <div class="enables-num">03</div>
+        <h3 class="enables-h">Technical and business founders, faster together.</h3>
+        <p class="enables-p">Vybe isn't a replacement for technical talent — it provides the stack and the agents that run the hard machinery, so technical and business people spend more time on product and less on plumbing.</p>
+      </div>
+      <div class="enables-cell">
+        <div class="enables-num">04</div>
+        <h3 class="enables-h">Your infrastructure. When you're ready to go.</h3>
+        <p class="enables-p">Your stack lives in your own cloud account from day one — walled, isolated, owned by you. When you're ready to take it fully in-house, you take it. The exit is as seamless as the start.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 — The gap / iceberg (Track B) -->
+<section class="iceberg-section">
+  <div class="container">
+    <span class="label">What it takes to get there</span>
+    <h2>Vibe coding gets you to MVP.<br>Production gets you to a company.</h2>
+    <p>Everything below the waterline in this picture is what turns a working app into a real company — and Vybe is that entire stack, built once and run for you. Whether you're technical or not, you don't rebuild this. You focus on customers; we carry the plumbing.</p>
+    <div class="iceberg-wrap">
+      <svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Iceberg showing vibe coding above waterline versus production infrastructure below">
+        <defs>
+          <radialGradient id="gL" cx="50%" cy="40%" r="58%">
+            <stop offset="0%" stop-color="#8B2E2E"/>
+            <stop offset="100%" stop-color="#0C0101"/>
+          </radialGradient>
+          <radialGradient id="gR" cx="50%" cy="30%" r="65%">
+            <stop offset="0%" stop-color="#902E2E"/>
+            <stop offset="100%" stop-color="#0C0101"/>
+          </radialGradient>
+          <clipPath id="clipR">
+            <path d="M 652 195 C 560 210 515 262 496 322 C 472 394 476 462 496 524 C 513 578 550 622 606 648 C 642 666 682 674 722 666 C 774 654 822 622 854 576 C 890 526 902 464 898 402 C 904 340 882 280 856 246 C 832 216 786 201 748 195 Z"/>
+          </clipPath>
+        </defs>
+        <rect width="1000" height="700" fill="#080808"/>
+        <text x="240" y="38" fill="white" font-family="Georgia,serif" font-size="26" font-weight="700" text-anchor="middle">Vibe Coding</text>
+        <text x="700" y="38" fill="white" font-family="Georgia,serif" font-size="26" font-weight="700" text-anchor="middle">Production Reality</text>
+        <line x1="10" y1="195" x2="990" y2="195" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
+        <path d="M 240 63 C 246 76 268 118 278 158 C 282 176 284 195 284 195 L 196 195 C 196 195 198 176 202 158 C 212 118 234 76 240 63 Z" fill="rgba(255,255,255,0.06)" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M 196 195 C 164 213 152 255 160 294 C 167 328 200 350 240 350 C 280 350 313 328 320 294 C 328 255 316 213 284 195 Z" fill="url(#gL)" stroke="white" stroke-width="1.5"/>
+        <path d="M 218 127 C 215 123 200 113 200 102 C 200 93 208 87 214 93 L 218 98 L 222 93 C 228 87 236 93 236 102 C 236 113 221 123 218 127 Z" fill="#FF3D7F"/>
+        <g transform="translate(259,108)" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round">
+          <line x1="0" y1="-9" x2="0" y2="9"/><line x1="-9" y1="0" x2="9" y2="0"/>
+          <line x1="-6.4" y1="-6.4" x2="6.4" y2="6.4"/><line x1="6.4" y1="-6.4" x2="-6.4" y2="6.4"/>
+        </g>
+        <circle cx="216" cy="148" r="11" fill="rgba(255,255,255,0.10)" stroke="white" stroke-width="1.8"/>
+        <circle cx="216" cy="148" r="3.5" fill="white" opacity="0.7"/>
+        <rect x="240" y="136" width="19" height="19" rx="3" fill="rgba(100,130,240,0.20)" stroke="rgba(170,190,255,0.85)" stroke-width="1.5"/>
+        <text x="240" y="184" text-anchor="middle" fill="#00CDB7" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700">W</text>
+        <path d="M 700 63 C 707 78 730 120 742 162 C 747 180 748 195 748 195 L 652 195 C 652 195 653 180 658 162 C 670 120 693 78 700 63 Z" fill="rgba(255,255,255,0.06)" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M 652 195 C 560 210 515 262 496 322 C 472 394 476 462 496 524 C 513 578 550 622 606 648 C 642 666 682 674 722 666 C 774 654 822 622 854 576 C 890 526 902 464 898 402 C 904 340 882 280 856 246 C 832 216 786 201 748 195 Z" fill="url(#gR)" stroke="white" stroke-width="1.5"/>
+        <g clip-path="url(#clipR)" font-family="Helvetica,Arial,sans-serif" fill="white" text-anchor="middle">
+          <text x="612" y="232" font-size="15">Kubernetes</text><text x="706" y="232" font-size="15">Docker</text>
+          <text x="796" y="232" font-size="21" font-weight="700">S3</text><text x="844" y="232" font-size="21" font-weight="700">FTP</text>
+          <text x="568" y="260" font-size="17" font-weight="600">SQS</text><text x="650" y="260" font-size="13">Cherry pick</text><text x="782" y="260" font-size="14">Staging</text>
+          <text x="561" y="290" font-size="22" font-weight="700">CI/CD</text><text x="652" y="290" font-size="14">CLOUD</text><text x="762" y="290" font-size="13">Containerisation</text><text x="864" y="290" font-size="12">SLAs</text>
+          <text x="576" y="320" font-size="23" font-weight="700">Firewall</text><text x="684" y="320" font-size="16">Web sockets</text><text x="808" y="320" font-size="15">Encryption</text>
+          <text x="553" y="350" font-size="13">Tensorflow</text><text x="664" y="350" font-size="25" font-weight="700">Database</text><text x="810" y="350" font-size="14">Kafka/RabbitMQ</text>
+          <text x="548" y="378" font-size="14">Serverless</text><text x="628" y="378" font-size="13">Lambda</text><text x="706" y="378" font-size="13">Optimisation</text><text x="796" y="378" font-size="13">git / github</text><text x="862" y="378" font-size="12">sharding</text>
+          <text x="558" y="406" font-size="13">PyCharm</text><text x="645" y="406" font-size="14">DynamoDB</text><text x="748" y="406" font-size="13">deployments</text><text x="848" y="406" font-size="12">Caching</text>
+          <text x="550" y="433" font-size="13">partitioning</text><text x="648" y="433" font-size="17">Rate limiting</text><text x="764" y="433" font-size="13">Embedded DB</text><text x="858" y="433" font-size="12">throughput</text>
+          <text x="566" y="460" font-size="17" font-weight="600">RPC</text><text x="660" y="460" font-size="21" font-weight="700">Error logging</text><text x="804" y="460" font-size="13">observability</text><text x="862" y="460" font-size="11">SLOs</text>
+          <text x="574" y="487" font-size="17" font-weight="600">QPS</text><text x="656" y="487" font-size="14">Load balancer</text><text x="758" y="487" font-size="18" font-weight="600">proxy</text><text x="836" y="487" font-size="12">on-call</text>
+          <text x="608" y="513" font-size="14">long / short polling</text><text x="768" y="513" font-size="13">incident response</text>
+          <text x="652" y="538" font-size="18" font-weight="600">availability</text><text x="778" y="538" font-size="13">audit logs</text>
+          <text x="650" y="562" font-size="13">SOC 2</text><text x="712" y="562" font-size="13">privacy</text><text x="776" y="562" font-size="13">load testing</text>
+          <text x="668" y="586" font-size="13">payroll</text><text x="728" y="586" font-size="13">legal</text><text x="790" y="586" font-size="13">contracts</text>
+          <text x="704" y="608" font-size="12">...... etc</text>
+        </g>
+        <text x="500" y="688" fill="rgba(255,255,255,0.4)" font-family="Georgia,serif" font-size="14" text-anchor="middle">Everything below the waterline — Vybe handles this so you don't have to.</text>
+      </svg>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.12);border-radius:6px;overflow:hidden;margin:40px 0 32px;">
+      <div style="background:#0B1B36;padding:28px 32px;text-align:center;">
+        <div style="font-family:Georgia,serif;font-size:52px;font-weight:700;color:#FF3D7F;line-height:1;">30M+</div>
+        <div style="font-size:14px;color:#9CA3AF;margin-top:8px;">people writing software with AI assistance today</div>
+      </div>
+      <div style="background:#0B1B36;padding:28px 32px;text-align:center;">
+        <div style="font-family:Georgia,serif;font-size:52px;font-weight:700;color:#FF3D7F;line-height:1;">&lt;1%</div>
+        <div style="font-size:14px;color:#9CA3AF;margin-top:8px;">of those prototypes ever reach production. The work is real. The path isn't.</div>
+      </div>
+    </div>
+    <div class="forces">
+      <div class="force">
+        <div class="num">01</div>
+        <h4>The cost to start has collapsed.</h4>
+        <p>A working prototype now takes a weekend. The gap that remains — everything below the waterline — hasn't changed.</p>
+      </div>
+      <div class="force">
+        <div class="num">02</div>
+        <h4>Millions of builders are stuck at the same wall.</h4>
+        <p>Domain expertise, customer networks, real theses — blocked by auth, CI/CD, observability, compliance, and scale. The same technical wall, for every founder, every time.</p>
+      </div>
+      <div class="force">
+        <div class="num">03</div>
+        <h4>The stack gap is the solvable one.</h4>
+        <p>Vybe is production-grade infrastructure built once and available to every team on the platform from day one — whether you're a business founder who needs the stack, or a technical founder who'd rather not rebuild it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6 — Pricing -->
+<section id="pricing">
+  <div class="container">
+    <span class="label">Pricing</span>
+    <h2>Start where it gets real.</h2>
+    <p>Your POC was the free version. Vybe picks up where it counts — production-grade from your first real user. Every plan includes the full stack; you choose how far you're scaling.</p>
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">Pilot</div>
+        <div class="plan-price"><sup>$</sup>99</div>
+        <div class="plan-period">per month · or $990/yr</div>
+        <p class="plan-tagline">You've got a POC — run a real pilot.</p>
+        <ul class="plan-features">
+          <li>1 developer</li>
+          <li>5 connected users</li>
+          <li>Full production stack</li>
+          <li>Self-serve help (knowledge forums)</li>
+          <li>Infra changes reviewed by Vybe</li>
+          <li>Included AI models</li>
+        </ul>
+        <a class="btn btn-outline" href="#get-started" style="display:block;text-align:center;padding:12px">Start your pilot</a>
+      </div>
+      <div class="plan plan--featured">
+        <div class="plan-badge">Most popular</div>
+        <div class="plan-name">Build</div>
+        <div class="plan-price"><sup>$</sup>399</div>
+        <div class="plan-period">per month · or $3,990/yr</div>
+        <p class="plan-tagline">Your pilot's working — grow it.</p>
+        <ul class="plan-features">
+          <li>3 developers</li>
+          <li>10 connected users</li>
+          <li>Everything in Pilot, plus:</li>
+          <li>Guided assistance</li>
+          <li>Auto-approved infra within a spend limit</li>
+          <li>Request premium AI models</li>
+        </ul>
+        <a class="btn btn-primary" href="#get-started" style="display:block;text-align:center;padding:12px">Start building</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Scale</div>
+        <div class="plan-price"><sup>$</sup>799</div>
+        <div class="plan-period">per month · or $7,990/yr</div>
+        <p class="plan-tagline">Real traction, real load.</p>
+        <ul class="plan-features">
+          <li>20 developers</li>
+          <li>1,000 connected users</li>
+          <li>Everything in Build, plus:</li>
+          <li>Vybe handles it (fully managed)</li>
+          <li>Unlimited infrastructure additions</li>
+          <li>Premium AI models</li>
+        </ul>
+        <a class="btn btn-outline" href="#get-started" style="display:block;text-align:center;padding:12px">Scale up</a>
+      </div>
+      <div class="plan" style="background:var(--off);">
+        <div class="plan-name" style="color:var(--pink);">Equity</div>
+        <div class="plan-price" style="font-size:32px;margin-top:6px;">No fee</div>
+        <div class="plan-period">we back you instead</div>
+        <p class="plan-tagline">We invest. You build. We win when you do.</p>
+        <ul class="plan-features">
+          <li>Everything in Scale</li>
+          <li>Pre-seed capital (apply)</li>
+          <li>Delaware C-Corp + cap table</li>
+          <li>Diligence-ready, separable tech</li>
+          <li>Subscription converts — no migration</li>
+        </ul>
+        <a class="btn btn-primary" href="#get-started" style="display:block;text-align:center;padding:12px">Reach out to apply</a>
+      </div>
+    </div>
+    <p class="addons-note">Add-ons: a one-time <strong style="color:var(--navy)">managed port</strong> for a hands-off migration · more capabilities via <strong style="color:var(--navy)">plugins</strong> as you grow.</p>
+  </div>
+</section>
+
+<!-- SECTION 7 — What's included -->
+<section>
+  <div class="container">
+    <span class="label">What's included</span>
+    <h2>Every plan ships the whole stack.</h2>
+    <p>Whatever plan you're on, you get the complete production stack from day one — the same foundation every time. Plans differ by how far you're scaling and how much we do for you, never by what you get.</p>
+    <div class="stack-grid">
+      <div class="stack-item"><div class="si-name">Authentication &amp; accounts</div><div class="si-desc">Sign-in, users, permissions</div></div>
+      <div class="stack-item"><div class="si-name">AI gateway</div><div class="si-desc">Models ready to use</div></div>
+      <div class="stack-item"><div class="si-name">Hosting &amp; compute</div><div class="si-desc">Scalable and production-grade</div></div>
+      <div class="stack-item"><div class="si-name">Managed database</div><div class="si-desc">Backed up and tuned</div></div>
+      <div class="stack-item"><div class="si-name">Monitoring &amp; errors</div><div class="si-desc">Know the moment something breaks</div></div>
+      <div class="stack-item"><div class="si-name">CI/CD &amp; background jobs</div><div class="si-desc">Ship fast, run async work</div></div>
+      <div class="stack-item"><div class="si-name">Email &amp; compliance</div><div class="si-desc">Transactional + the legal basics</div></div>
+      <div class="stack-item"><div class="si-name">Networking &amp; secrets</div><div class="si-desc">Locked down by default</div></div>
+    </div>
+    <div class="offramp">
+      <h3>Yours to keep.</h3>
+      <p>The stack is open-source and runs in your own cloud account — documented and built to come apart cleanly. When you raise, get acquired, or take it in-house, your technology is an asset, not a trap.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8 — Who it's for -->
+<section>
+  <div class="container">
+    <span class="label">Who it's for</span>
+    <h2>Whether you say "I can't build that"<br>or "I'd rather not build that."</h2>
+    <p>Vybe meets you anywhere on the technical spectrum. Whether you've never run a server or you've architected production systems for years, the deal is the same — you bring the idea and the proof; Vybe provides the stack.</p>
+    <div class="spectrum-bar"><span>Non-technical</span><span class="line"></span><span>Technical</span></div>
+    <div class="personas">
+      <div class="persona">
+        <div class="ptag">Non-technical</div>
+        <h3>The domain expert</h3>
+        <p>You know your market cold and vibe-coded a POC to prove it. You've never run production infrastructure — and you shouldn't have to. Vybe is how you ship without a technical co-founder.</p>
+        <p class="trigger">"I spent fifteen years in this industry and finally built the thing it needed — I just had no idea how to make it real. Vybe did the part I couldn't."</p>
+      </div>
+      <div class="persona">
+        <div class="ptag">Semi-technical</div>
+        <h3>The product builder</h3>
+        <p>You can shape a product and vibe-code your way to something real, but auth, security, and scale aren't your world. Vybe handles the engineering so you stay on product and customers.</p>
+        <p class="trigger">"I can get a prototype 80% of the way there. Vybe handled the 20% that would've taken me six months — and I never left the product."</p>
+      </div>
+      <div class="persona">
+        <div class="ptag">Technical</div>
+        <h3>The engineer</h3>
+        <p>You could build all of this yourself — you've done it before. Vybe is the stack you'd design anyway, already running and fully yours. Skip three months of setup and start shipping.</p>
+        <p class="trigger">"I've stood up this exact stack three times and didn't want a fourth. Told Claude Code to port it, validated it that afternoon, shipped features the same day."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9 — How it works -->
+<section id="how">
+  <div class="container">
+    <span class="label">How it works</span>
+    <h2>You talk. The agents build.</h2>
+    <p>Vybe lives where you already work — in Claude Code, inside your own project. You describe what you want in plain language; Vybe's agents handle the machinery. You stay in control the whole way.</p>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <div class="how-body">
+          <h4>Point Vybe at your app</h4>
+          <p>In your project directory, tell Claude Code to port your app. It reads your codebase and interviews you about what the app does and needs.</p>
+          <div class="term"><span class="muted">~/your-app $</span> <span class="prompt">port app to vybe</span></div>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <div class="how-body">
+          <h4>Agree on the plan</h4>
+          <p>Vybe proposes how it'll take you to production: architecture, services, data. Nothing happens until you approve.</p>
+        </div>
+      </div>
+      <div class="how-step how-step--key">
+        <div class="how-num">3</div>
+        <div class="how-body">
+          <h4>Vybe builds it</h4>
+          <p>The agents provision everything below the waterline — hosting, CI/CD, auth, database, monitoring, security. Your app on production infrastructure in a couple of hours.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">4</div>
+        <div class="how-body">
+          <h4>Validate &amp; accept</h4>
+          <p>You review the ported app running on the new stack and accept or decline. Nothing's final until you're satisfied.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">5</div>
+        <div class="how-body">
+          <h4>Get your onboarding kit</h4>
+          <p>A complete kit lands in your inbox: access to your git repo and accounts, plus instructions you can load straight into Claude Code.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">6</div>
+        <div class="how-body">
+          <h4>Ship by talking</h4>
+          <p>Found a bug? Tell Claude Code what's wrong and it fixes the code. Test locally, then deploy. Iterate as often as you like.</p>
+          <div class="term"><span class="muted">~/your-app $</span> <span class="prompt">deploy</span></div>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">7</div>
+        <div class="how-body">
+          <h4>Always yours</h4>
+          <p>It all runs in your own cloud account, documented and separable. The day you want to take it in-house, you take it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 13 — Get started -->
+<section class="get-started-section" id="get-started">
+  <div class="container">
+    <span class="label">Get started</span>
+    <h2>Your POC is ready. Make it real.</h2>
+    <div class="get-started-grid">
+      <div class="gs-col">
+        <h3>Start now</h3>
+        <p>Pick a plan, point Vybe at your app, and you're on production infrastructure in a couple of hours — no sales call, no setup project.</p>
+        <div class="pricing-links">
+          <a href="#pricing" class="pricing-link">
+            <div class="pl-left"><span class="pl-name">Pilot</span></div>
+            <div class="pl-right"><span class="pl-price">$99<span style="font-size:13px;color:var(--mute);font-weight:400">/mo</span></span><span style="color:var(--mute);">→</span></div>
+          </a>
+          <a href="#pricing" class="pricing-link featured">
+            <div class="pl-left"><span class="pl-name">Build</span><span class="pl-badge">Popular</span></div>
+            <div class="pl-right"><span class="pl-price">$399<span style="font-size:13px;color:var(--mute);font-weight:400">/mo</span></span><span style="color:var(--mute);">→</span></div>
+          </a>
+          <a href="#pricing" class="pricing-link">
+            <div class="pl-left"><span class="pl-name">Scale</span></div>
+            <div class="pl-right"><span class="pl-price">$799<span style="font-size:13px;color:var(--mute);font-weight:400">/mo</span></span><span style="color:var(--mute);">→</span></div>
+          </a>
+        </div>
+      </div>
+      <div class="gs-col" id="backing">
+        <h3>Apply for equity backing</h3>
+        <p>Raising and want Vybe on the cap table? Tell us what you're building and we'll be in touch. If you're already on a subscription, say so — the infrastructure is already running.</p>
+        <form onsubmit="handleSubmit(event)">
+          <input type="text" placeholder="Your name" required>
+          <input type="email" placeholder="Email address" required>
+          <input type="text" placeholder="What are you building? (one line)">
+          <select>
+            <option value="" disabled selected>Where are you with it?</option>
+            <option>Idea only — nothing built yet</option>
+            <option>POC exists, not in production</option>
+            <option>Live on a Vybe plan — ready to formalize</option>
+            <option>Already have customers or revenue</option>
+          </select>
+          <button class="form-submit" type="submit">
+            Send application <span>→</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">V Y B E<span>.</span></div>
+      <div style="text-align:right;">
+        <p>© 2026 Vybe — your production technology partner.</p>
+        <p style="margin-top:4px;">Build the business. Not the plumbing. <a href="#get-started" style="color:var(--pink);text-decoration:none;">Get started →</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = "Sent — we'll be in touch within a week.";
+    btn.style.background = 'var(--navy)';
+    btn.style.justifyContent = 'center';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
