@@ -364,57 +364,7 @@
     <h2>Your app works. That's<br><em>not the same as being ready.</em></h2>
     <p>Vibe coding collapsed the cost of the visible part — the product, the idea, the thing you demo. What it didn't change is everything below the waterline: the infrastructure, the security, the compliance, the ops. That gap is where companies stall. Vybe is that entire stack, built once and run for you.</p>
     <div class="iceberg-wrap">
-      <svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Iceberg showing vibe coding above waterline versus production infrastructure below">
-        <defs>
-          <radialGradient id="gL" cx="50%" cy="40%" r="58%">
-            <stop offset="0%" stop-color="#8B2E2E"/>
-            <stop offset="100%" stop-color="#0C0101"/>
-          </radialGradient>
-          <radialGradient id="gR" cx="50%" cy="30%" r="65%">
-            <stop offset="0%" stop-color="#902E2E"/>
-            <stop offset="100%" stop-color="#0C0101"/>
-          </radialGradient>
-          <clipPath id="clipR">
-            <path d="M 652 195 C 560 210 515 262 496 322 C 472 394 476 462 496 524 C 513 578 550 622 606 648 C 642 666 682 674 722 666 C 774 654 822 622 854 576 C 890 526 902 464 898 402 C 904 340 882 280 856 246 C 832 216 786 201 748 195 Z"/>
-          </clipPath>
-        </defs>
-        <rect width="1000" height="700" fill="#080808"/>
-        <text x="240" y="38" fill="white" font-family="Georgia,serif" font-size="26" font-weight="700" text-anchor="middle">Vibe Coding</text>
-        <text x="700" y="38" fill="white" font-family="Georgia,serif" font-size="26" font-weight="700" text-anchor="middle">Production Reality</text>
-        <line x1="10" y1="195" x2="990" y2="195" stroke="rgba(255,255,255,0.30)" stroke-width="1"/>
-        <path d="M 240 63 C 246 76 268 118 278 158 C 282 176 284 195 284 195 L 196 195 C 196 195 198 176 202 158 C 212 118 234 76 240 63 Z" fill="rgba(255,255,255,0.06)" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
-        <path d="M 196 195 C 164 213 152 255 160 294 C 167 328 200 350 240 350 C 280 350 313 328 320 294 C 328 255 316 213 284 195 Z" fill="url(#gL)" stroke="white" stroke-width="1.5"/>
-        <path d="M 218 127 C 215 123 200 113 200 102 C 200 93 208 87 214 93 L 218 98 L 222 93 C 228 87 236 93 236 102 C 236 113 221 123 218 127 Z" fill="#10B981"/>
-        <g transform="translate(259,108)" stroke="#FF6B35" stroke-width="2.5" stroke-linecap="round">
-          <line x1="0" y1="-9" x2="0" y2="9"/><line x1="-9" y1="0" x2="9" y2="0"/>
-          <line x1="-6.4" y1="-6.4" x2="6.4" y2="6.4"/><line x1="6.4" y1="-6.4" x2="-6.4" y2="6.4"/>
-        </g>
-        <circle cx="216" cy="148" r="11" fill="rgba(255,255,255,0.10)" stroke="white" stroke-width="1.8"/>
-        <circle cx="216" cy="148" r="3.5" fill="white" opacity="0.7"/>
-        <rect x="240" y="136" width="19" height="19" rx="3" fill="rgba(100,130,240,0.20)" stroke="rgba(170,190,255,0.85)" stroke-width="1.5"/>
-        <text x="240" y="184" text-anchor="middle" fill="#00CDB7" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700">W</text>
-        <path d="M 700 63 C 707 78 730 120 742 162 C 747 180 748 195 748 195 L 652 195 C 652 195 653 180 658 162 C 670 120 693 78 700 63 Z" fill="rgba(255,255,255,0.06)" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
-        <path d="M 652 195 C 560 210 515 262 496 322 C 472 394 476 462 496 524 C 513 578 550 622 606 648 C 642 666 682 674 722 666 C 774 654 822 622 854 576 C 890 526 902 464 898 402 C 904 340 882 280 856 246 C 832 216 786 201 748 195 Z" fill="url(#gR)" stroke="white" stroke-width="1.5"/>
-        <g clip-path="url(#clipR)" font-family="Helvetica,Arial,sans-serif" fill="white" text-anchor="middle">
-          <text x="612" y="232" font-size="15">Kubernetes</text><text x="706" y="232" font-size="15">Docker</text>
-          <text x="796" y="232" font-size="21" font-weight="700">S3</text><text x="844" y="232" font-size="21" font-weight="700">FTP</text>
-          <text x="568" y="260" font-size="17" font-weight="600">SQS</text><text x="650" y="260" font-size="13">Cherry pick</text><text x="782" y="260" font-size="14">Staging</text>
-          <text x="561" y="290" font-size="22" font-weight="700">CI/CD</text><text x="652" y="290" font-size="14">CLOUD</text><text x="762" y="290" font-size="13">Containerisation</text><text x="864" y="290" font-size="12">SLAs</text>
-          <text x="576" y="320" font-size="23" font-weight="700">Firewall</text><text x="684" y="320" font-size="16">Web sockets</text><text x="808" y="320" font-size="15">Encryption</text>
-          <text x="553" y="350" font-size="13">Tensorflow</text><text x="664" y="350" font-size="25" font-weight="700">Database</text><text x="810" y="350" font-size="14">Kafka/RabbitMQ</text>
-          <text x="548" y="378" font-size="14">Serverless</text><text x="628" y="378" font-size="13">Lambda</text><text x="706" y="378" font-size="13">Optimisation</text><text x="796" y="378" font-size="13">git / github</text><text x="862" y="378" font-size="12">sharding</text>
-          <text x="558" y="406" font-size="13">PyCharm</text><text x="645" y="406" font-size="14">DynamoDB</text><text x="748" y="406" font-size="13">deployments</text><text x="848" y="406" font-size="12">Caching</text>
-          <text x="550" y="433" font-size="13">partitioning</text><text x="648" y="433" font-size="17">Rate limiting</text><text x="764" y="433" font-size="13">Embedded DB</text><text x="858" y="433" font-size="12">throughput</text>
-          <text x="566" y="460" font-size="17" font-weight="600">RPC</text><text x="660" y="460" font-size="21" font-weight="700">Error logging</text><text x="804" y="460" font-size="13">observability</text><text x="862" y="460" font-size="11">SLOs</text>
-          <text x="574" y="487" font-size="17" font-weight="600">QPS</text><text x="656" y="487" font-size="14">Load balancer</text><text x="758" y="487" font-size="18" font-weight="600">proxy</text><text x="836" y="487" font-size="12">on-call</text>
-          <text x="608" y="513" font-size="14">long / short polling</text><text x="768" y="513" font-size="13">incident response</text>
-          <text x="652" y="538" font-size="18" font-weight="600">availability</text><text x="778" y="538" font-size="13">audit logs</text>
-          <text x="650" y="562" font-size="13">SOC 2</text><text x="712" y="562" font-size="13">privacy</text><text x="776" y="562" font-size="13">load testing</text>
-          <text x="668" y="586" font-size="13">payroll</text><text x="728" y="586" font-size="13">legal</text><text x="790" y="586" font-size="13">contracts</text>
-          <text x="704" y="608" font-size="12">...... etc</text>
-        </g>
-        <text x="500" y="688" fill="rgba(255,255,255,0.4)" font-family="Georgia,serif" font-size="14" text-anchor="middle">Everything below the waterline — Vybe handles this so you don't have to.</text>
-      </svg>
+      <img src="iceberg.png" alt="An iceberg — a handful of app icons float above the waterline; below sits the production stack: Kubernetes, CI/CD, database, firewall, observability, SOC 2, and more." style="display:block;width:100%;max-width:600px;margin:0 auto;border-radius:10px;">
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.12);border-radius:6px;overflow:hidden;margin:40px 0 32px;">
       <div style="background:#0B1B36;padding:28px 32px;text-align:center;">
