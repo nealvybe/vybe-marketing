@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vybe — Your production technology partner</title>
+<title>Vybe — Production is a different problem</title>
 <style>
   :root {
     --navy: #0B1B36;
@@ -102,42 +102,9 @@
     max-width: 580px; margin-bottom: 44px; line-height: 1.5;
   }
   .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
-  .hero-proof {
-    margin-top: 56px; padding-top: 32px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    font-size: 13px; color: rgba(255,255,255,0.45);
-    letter-spacing: 0.12em; text-transform: uppercase;
-  }
-  .hero-proof-row { display: flex; gap: 32px; flex-wrap: wrap; margin-top: 12px; }
-  .hero-proof-item { font-size: 13px; color: rgba(255,255,255,0.55); }
-  .hero-proof-item strong { color: #fff; font-size: 18px; display: block; margin-bottom: 2px; }
 
   /* OCTO SECTION */
   .octo-section { background: var(--off); border-bottom: 1px solid var(--line); }
-  .octo-split {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
-    align-items: start; margin-top: 48px;
-  }
-  .octo-label {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
-    text-transform: uppercase; margin-bottom: 16px; display: block;
-  }
-  .octo-label--before { color: var(--mute); }
-  .octo-label--after { color: var(--pink); }
-  .octo-items { list-style: none; }
-  .octo-items li {
-    display: flex; gap: 12px; align-items: flex-start;
-    padding: 12px 0; border-bottom: 1px solid var(--line);
-    font-size: 15px;
-  }
-  .octo-items li:last-child { border-bottom: none; }
-  .octo-items li .ico { flex-shrink: 0; margin-top: 2px; }
-  .octo-items li .ico--x { color: #dc2626; font-size: 13px; font-weight: 700; }
-  .octo-items li .ico--check { color: var(--pink); font-size: 13px; font-weight: 700; }
-  .octo-items li strong { color: var(--navy); }
-  .octo-items li span { color: #374151; }
-
-  /* ENABLES GRID */
   .enables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 44px; border: 1px solid var(--line); }
   .enables-cell { padding: 36px 36px; }
   .enables-cell--br { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -153,6 +120,7 @@
     border-bottom: 1px solid rgba(255,255,255,0.06); padding: 88px 0;
   }
   .iceberg-section h2 { color: #fff; }
+  .iceberg-section h2 em { color: var(--pink); font-style: normal; }
   .iceberg-section .label { color: var(--pink); }
   .iceberg-section p { color: #C8CFDA; }
   .iceberg-wrap { margin: 40px 0 12px; width: 100%; }
@@ -206,6 +174,19 @@
   .plan-note { font-size: 12px; color: var(--mute); line-height: 1.5; margin-top: 10px; }
   .plan--featured .plan-note { color: rgba(255,255,255,0.4); }
   .addons-note { margin-top: 22px; font-size: 14px; color: var(--mute); text-align: center; }
+
+  /* SETUP & HANDOFF CALLOUT */
+  .setup-callout {
+    margin-top: 40px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--off); padding: 28px 32px;
+    display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center;
+  }
+  .setup-callout .sc-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pink); margin-bottom: 8px; }
+  .setup-callout h3 { font-family: Georgia, serif; font-size: 22px; color: var(--navy); margin: 0 0 8px; font-weight: 700; }
+  .setup-callout p { font-size: 14px; color: #374151; margin: 0; line-height: 1.6; max-width: 640px; }
+  .setup-callout .sc-price { text-align: center; flex-shrink: 0; }
+  .setup-callout .sc-price .amt { font-family: Georgia, serif; font-size: 44px; font-weight: 700; color: var(--navy); line-height: 1; }
+  .setup-callout .sc-price .lbl { font-size: 12px; color: var(--mute); margin-top: 4px; }
 
   /* BASELINE STACK GRID */
   .stack-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 36px; }
@@ -300,16 +281,17 @@
   @media (max-width: 768px) {
     .hero h1 { font-size: 50px; }
     .hero .sub { font-size: 17px; }
-    .octo-split, .enables-grid, .pricing-grid, .stack-grid, .personas, .get-started-grid { grid-template-columns: 1fr; }
+    .enables-grid, .pricing-grid, .stack-grid, .personas, .get-started-grid { grid-template-columns: 1fr; }
     .enables-cell--br, .enables-cell--b, .enables-cell--r { border-right: none; border-bottom: 1px solid var(--line); }
     .enables-cell { border-bottom: 1px solid var(--line); }
     .enables-cell:last-child { border-bottom: none; }
     .pricing-grid .plan { border-right: none; border-bottom: 1px solid var(--line); }
     .pricing-grid .plan:last-child { border-bottom: none; }
     .stack-grid { grid-template-columns: 1fr 1fr; }
+    .setup-callout { grid-template-columns: 1fr; text-align: center; }
+    .setup-callout p { max-width: none; }
     .forces { grid-template-columns: 1fr; }
     .spectrum-bar { display: none; }
-    .hero-proof-row { gap: 20px; }
     h2 { font-size: 30px; }
     section { padding: 60px 0; }
     .nav-inner { padding: 16px 20px; }
@@ -331,12 +313,12 @@
   </div>
 </nav>
 
-<!-- HERO (Neutral control) -->
+<!-- HERO -->
 <header class="hero">
   <div class="container">
-    <div class="eyebrow">The production partner for AI-built apps</div>
-    <h1>Build the business.<br><em>Not the plumbing.</em></h1>
-    <p class="sub">You vibe-coded something real. The moment you want actual users on it, you need a real stack — security, compliance, the right services wired together. Vybe is the partner that builds it with you, hosts it, and hands it back when you're ready to go on your own.</p>
+    <div class="eyebrow">The illusion of readiness</div>
+    <h1>Your vibe code works.<br><em>Production is a different problem.</em></h1>
+    <p class="sub">You built something real — and it feels ready. The wall between a vibe-coded app and a production company is invisible until you hit it. Vybe is the bridge: every service wired, every system running, handed back to you when you're ready to go on your own.</p>
     <div class="hero-ctas">
       <a class="btn btn-primary btn-lg" href="#pricing">Start building — from $99/mo</a>
       <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
@@ -344,17 +326,17 @@
   </div>
 </header>
 
-<!-- SECTION 2 — What this changes (Neutral) -->
+<!-- SECTION 2 — What this unlocks -->
 <section class="octo-section">
   <div class="container">
-    <span class="label">What this changes</span>
-    <h2>Focus on the business.<br>We handle the build.</h2>
-    <p class="lede">Vybe removes the setup tax and hands you a production stack you own. Whether you're leading the business or the engineering, your time goes to product and customers, not plumbing — and we're in it with you: we win when you become the next unicorn.</p>
+    <span class="label">What this unlocks</span>
+    <h2>Spend your days on the business.<br>We'll build the rest.</h2>
+    <p class="lede">With production engineering handled, your time goes where it should — product, customers, growth. Vybe gives you a battle-tested stack, the process to ship on it, and every service pre-connected, so you move fast without leaving anything broken behind you. We win when you become the next unicorn.</p>
     <div class="enables-grid">
       <div class="enables-cell enables-cell--br">
         <div class="enables-num">01</div>
         <h3 class="enables-h">Build in hours. Pivot the same day.</h3>
-        <p class="enables-p">A couple of hours from prototype to production-grade infrastructure. When the market shifts and you need to change direction, your stack moves with you — not against you. Faster iteration, fewer blockers, more shots at the right answer.</p>
+        <p class="enables-p">A couple of hours from vibe code to production-grade infrastructure. When the market shifts and you need to change direction, your stack moves with you — not against you. Faster iteration, fewer blockers, more shots at the right answer.</p>
       </div>
       <div class="enables-cell enables-cell--b">
         <div class="enables-num">02</div>
@@ -375,12 +357,12 @@
   </div>
 </section>
 
-<!-- SECTION 3 — The gap / iceberg (Neutral) -->
+<!-- SECTION 3 — The illusion of readiness / iceberg -->
 <section class="iceberg-section">
   <div class="container">
-    <span class="label">The gap we exist to close</span>
-    <h2>Vibe coding gets you to MVP.<br>Production gets you to a company.</h2>
-    <p>Everything below the waterline in this picture is what turns a working app into a real company — and Vybe is that entire stack, built once and run for you. Whether you're technical or not, you don't rebuild this. You focus on customers; we carry the plumbing.</p>
+    <span class="label">The illusion of readiness</span>
+    <h2>Your app works. That's<br><em>not the same as being ready.</em></h2>
+    <p>Vibe coding collapsed the cost of the visible part — the product, the idea, the thing you demo. What it didn't change is everything below the waterline: the infrastructure, the security, the compliance, the ops. That gap is where companies stall. Vybe is that entire stack, built once and run for you.</p>
     <div class="iceberg-wrap">
       <svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Iceberg showing vibe coding above waterline versus production infrastructure below">
         <defs>
@@ -441,14 +423,14 @@
       </div>
       <div style="background:#0B1B36;padding:28px 32px;text-align:center;">
         <div style="font-family:Georgia,serif;font-size:52px;font-weight:700;color:#10B981;line-height:1;">&lt;1%</div>
-        <div style="font-size:14px;color:#9CA3AF;margin-top:8px;">of those prototypes ever reach production. The work is real. The path isn't.</div>
+        <div style="font-size:14px;color:#9CA3AF;margin-top:8px;">of that vibe code ever reaches production. The work is real. The path isn't.</div>
       </div>
     </div>
     <div class="forces">
       <div class="force">
         <div class="num">01</div>
-        <h4>The cost to start has collapsed.</h4>
-        <p>A working prototype now takes a weekend. The gap that remains — everything below the waterline — hasn't changed.</p>
+        <h4>The illusion is the product of its own success.</h4>
+        <p>A vibe-coded app now takes a weekend. It looks finished. It demos well. It feels ready. Everything below the waterline — the gap between "working" and "production" — hasn't changed.</p>
       </div>
       <div class="force">
         <div class="num">02</div>
@@ -469,13 +451,13 @@
   <div class="container">
     <span class="label">Pricing</span>
     <h2>Start where it gets real.</h2>
-    <p>Your POC was the free version. Vybe picks up where it counts — production-grade from your first real user. Every plan includes the full stack; you choose how far you're scaling.</p>
+    <p>Your vibe code was the free version. Vybe picks up where it counts — production-grade from your first real user. Every plan includes the full stack; you choose how far you're scaling.</p>
     <div class="pricing-grid">
       <div class="plan">
         <div class="plan-name">Pilot</div>
         <div class="plan-price"><sup>$</sup>99</div>
         <div class="plan-period">per month · or $990/yr</div>
-        <p class="plan-tagline">You've got a POC — run a real pilot.</p>
+        <p class="plan-tagline">Your vibe code works — run a real pilot.</p>
         <ul class="plan-features">
           <li>1 developer</li>
           <li>5 connected users</li>
@@ -485,6 +467,7 @@
           <li>Included AI models</li>
         </ul>
         <a class="btn btn-outline" href="#get-started" style="display:block;text-align:center;padding:12px">Start your pilot</a>
+        <p class="plan-note">+ $1,800 one-time setup &amp; handoff</p>
       </div>
       <div class="plan plan--featured">
         <div class="plan-badge">Most popular</div>
@@ -501,6 +484,7 @@
           <li>Request premium AI models</li>
         </ul>
         <a class="btn btn-primary" href="#get-started" style="display:block;text-align:center;padding:12px">Start building</a>
+        <p class="plan-note">+ $1,800 one-time setup &amp; handoff</p>
       </div>
       <div class="plan">
         <div class="plan-name">Scale</div>
@@ -516,23 +500,38 @@
           <li>Premium AI models</li>
         </ul>
         <a class="btn btn-outline" href="#get-started" style="display:block;text-align:center;padding:12px">Scale up</a>
+        <p class="plan-note">+ $1,800 one-time setup &amp; handoff</p>
       </div>
       <div class="plan" style="background:var(--off);">
         <div class="plan-name" style="color:var(--pink);">Equity</div>
-        <div class="plan-price" style="font-size:32px;margin-top:6px;">No fee</div>
-        <div class="plan-period">we back you instead</div>
-        <p class="plan-tagline">We invest. You build. We win when you do.</p>
+        <div class="plan-price" style="font-size:32px;margin-top:6px;">2 yrs free</div>
+        <div class="plan-period">in exchange for a stake</div>
+        <p class="plan-tagline">You give us a stake. We give you two years free. We win when you do.</p>
         <ul class="plan-features">
-          <li>Everything in Scale</li>
-          <li>Pre-seed capital (apply)</li>
-          <li>Delaware C-Corp + cap table</li>
-          <li>Diligence-ready, separable tech</li>
+          <li>Everything in Scale — free for 2 years</li>
+          <li>Setup &amp; handoff fee waived</li>
+          <li>Delaware C-Corp + cap table setup</li>
+          <li>Diligence-ready, separable architecture</li>
           <li>Subscription converts — no migration</li>
         </ul>
         <a class="btn btn-primary" href="#get-started" style="display:block;text-align:center;padding:12px">Reach out to apply</a>
+        <p class="plan-note">No cash changes hands — the value is the platform. Interested? Reach out and we'll talk terms.</p>
       </div>
     </div>
-    <p class="addons-note">Add-ons: a one-time <strong style="color:var(--navy)">managed port</strong> for a hands-off migration · more capabilities via <strong style="color:var(--navy)">plugins</strong> as you grow.</p>
+
+    <!-- SETUP & HANDOFF -->
+    <div class="setup-callout">
+      <div>
+        <div class="sc-eyebrow">One-time · Setup &amp; Handoff</div>
+        <h3>Your exit is prepaid. No lock-in, ever.</h3>
+        <p>One flat fee covers porting your vibe code onto Vybe <em>and</em> your guaranteed clean handoff whenever you choose to leave. There's no exit fee — because you've already paid for the way out. Compare that to 60–80 hours of DIY setup and the risk of getting production wrong. <strong style="color:var(--navy)">Waived on the equity track.</strong></p>
+      </div>
+      <div class="sc-price">
+        <div class="amt">$1,800</div>
+        <div class="lbl">one-time</div>
+      </div>
+    </div>
+    <p class="addons-note">Extend with <strong style="color:var(--navy)">plugins</strong> as you grow.</p>
   </div>
 </section>
 
@@ -554,7 +553,7 @@
     </div>
     <div class="offramp">
       <h3>Yours to keep.</h3>
-      <p>The stack is open-source and runs in your own cloud account — documented and built to come apart cleanly. When you raise, get acquired, or take it in-house, your technology is an asset, not a trap.</p>
+      <p>The stack is open-source and runs in your own cloud account — documented and built to come apart cleanly. When you raise, get acquired, or take it in-house, your technology is an asset, not a trap. And your clean handoff is already paid for.</p>
     </div>
   </div>
 </section>
@@ -570,14 +569,14 @@
       <div class="persona">
         <div class="ptag">Non-technical</div>
         <h3>The domain expert</h3>
-        <p>You know your market cold and vibe-coded a POC to prove it. You've never run production infrastructure — and you shouldn't have to. Vybe is how you ship without a technical co-founder.</p>
+        <p>You know your market cold and vibe-coded something to prove it. You've never run production infrastructure — and you shouldn't have to. Vybe is how you ship without a technical co-founder.</p>
         <p class="trigger">"I spent fifteen years in this industry and finally built the thing it needed — I just had no idea how to make it real. Vybe did the part I couldn't."</p>
       </div>
       <div class="persona">
         <div class="ptag">Semi-technical</div>
         <h3>The product builder</h3>
         <p>You can shape a product and vibe-code your way to something real, but auth, security, and scale aren't your world. Vybe handles the engineering so you stay on product and customers.</p>
-        <p class="trigger">"I can get a prototype 80% of the way there. Vybe handled the 20% that would've taken me six months — and I never left the product."</p>
+        <p class="trigger">"I can vibe-code 80% of the way there. Vybe handled the 20% that would've taken me six months — and I never left the product."</p>
       </div>
       <div class="persona">
         <div class="ptag">Technical</div>
@@ -644,7 +643,7 @@
         <div class="how-num">7</div>
         <div class="how-body">
           <h4>Always yours</h4>
-          <p>It all runs in your own cloud account, documented and separable. The day you want to take it in-house, you take it.</p>
+          <p>It all runs in your own cloud account, documented and separable. The day you want to take it in-house, you take it — your handoff is already paid for.</p>
         </div>
       </div>
     </div>
@@ -655,7 +654,7 @@
 <section class="get-started-section" id="get-started">
   <div class="container">
     <span class="label">Get started</span>
-    <h2>Your POC is ready. Make it real.</h2>
+    <h2>Your vibe code is ready. Make it real.</h2>
     <div class="get-started-grid">
       <div class="gs-col">
         <h3>Start now</h3>
@@ -676,21 +675,22 @@
         </div>
       </div>
       <div class="gs-col" id="backing">
-        <h3>Apply for equity backing</h3>
-        <p>Raising and want Vybe on the cap table? Tell us what you're building and we'll be in touch. If you're already on a subscription, say so — the infrastructure is already running.</p>
+        <h3>Apply for the equity track</h3>
+        <p>Give Vybe a stake and we give you two years of the full production stack at no cost — setup &amp; handoff waived, Delaware C-Corp setup, diligence-ready architecture. No cash changes hands; the value is the platform.</p>
+        <p style="font-size:13px;color:var(--mute);margin-bottom:16px;">Already on a subscription? Say so — your infrastructure is already running. We take the stake and billing stops. No migration, no starting over.</p>
         <form onsubmit="handleSubmit(event)">
           <input type="text" placeholder="Your name" required>
           <input type="email" placeholder="Email address" required>
           <input type="text" placeholder="What are you building? (one line)">
           <select>
             <option value="" disabled selected>Where are you with it?</option>
-            <option>Idea only — nothing built yet</option>
-            <option>POC exists, not in production</option>
-            <option>Live on a Vybe plan — ready to formalize</option>
+            <option>Vibe-coded something — not in production yet</option>
+            <option>Live on a Vybe subscription — ready to formalize</option>
             <option>Already have customers or revenue</option>
+            <option>Pre-product — just the idea so far</option>
           </select>
           <button class="form-submit" type="submit">
-            Send application <span>→</span>
+            Apply for equity track <span>→</span>
           </button>
         </form>
       </div>
